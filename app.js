@@ -1,57 +1,63 @@
-const chalk = require('chalk');
-const yargs = require('yargs');
-const getNotes = require('./notes');
+const chalk = require('chalk')
+const yargs = require('yargs')
+const notes = require('./notes.js')
 
-// Customizing yargs version
-yargs.version('1.1.0');
+// Customize yargs version
+yargs.version('1.1.0')
 
-// Create Add Command
+// Create add command
 yargs.command({
-  command: "add",
-  describe: "Add a new note command",
-  builder: {
-    title: {
-      describe: "Note Title",
-      demandOption: true,
-      type: 'string'
+    command: 'add',
+    describe: 'Add a new note',
+    builder: {
+        title: {
+            describe: 'Note title',
+            demandOption: true,
+            type: 'string'
+        },
+        body: {
+            describe: 'Note body',
+            demandOption: true,
+            type: 'string'
+        }
     },
-    body: {
-      describe: 'Notes body',
-      demandOption: true,
-      type: 'string'
+    handler: function (argv) {
+        notes.addNote(argv.title, argv.body)
     }
-  },
-  handler: function(argv){
-    console.log('Title: ' + argv.title);
-    console.log('Body: ' + argv.body);
-  }
-});
-
-// Create Remove Command
-yargs.command({
-  command: "remove",
-  describe: "Removes all my notes",
-  handler: function(){
-    console.log("Removing Notes...")
-  }
-});
-
-// Create Listing Command
-yargs.command({
-  command: "list",
-  describe: "lists all my notes",
-  handler: function(){
-    console.log("Listing Notes...")
-  }
-});
-
-// Create Read Command
-yargs.command({
-  command: "read",
-  describe: "Reads the notes",
-  handler: function(){
-    console.log("Reading Notes...")
-  }
 })
 
-yargs.parse();
+// Create remove command
+yargs.command({
+    command: 'remove',
+    describe: 'Remove a note',
+    builder: {
+      title: {
+        describe: "Title of note to be deleted",
+        demandOption: true,
+        type: String
+      }
+    },
+    handler: function (argv) {
+        notes.removeNote(argv.title);
+    }
+})
+
+// Create list command
+yargs.command({
+    command: 'list',
+    describe: 'List your notes',
+    handler: function () {
+        console.log('Listing out all notes')
+    }
+})
+
+// Create read command
+yargs.command({
+    command: 'read',
+    describe: 'Read a note',
+    handler: function () {
+        console.log('Reading a note')
+    }
+})
+
+yargs.parse()
