@@ -11,7 +11,7 @@ const addNote = (title, body) => {
             body: body
         })
         saveNotes(notes)
-        console.log(chalk.green('New note added!'));
+        console.log(chalk.green('New note added to cache!'));
     } else {
         console.log(chalk.red('Note title taken!'));
     }
