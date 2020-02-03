@@ -29,7 +29,7 @@ yargs.command({
 // Create remove command
 yargs.command({
     command: 'remove',
-    describe: 'Remove a note',
+    describe: 'Method to Remove a note',
     builder: {
       title: {
         describe: "Title of note to be deleted",
